@@ -11,8 +11,8 @@ execute 'nnoremap' plugkey .. 'a <Nop>'
 execute 'nnoremap' plugkey .. 'i <Nop>'
 execute 'nnoremap' plugkey .. '<CR> <ScriptCmd>v:hlsearch = v:hlsearch ? 0 : 1<CR>'
 
-final patsets = {}
-export def DefinePatternSet(name: string, keys: list<string>, patset: list<string>)
+var patsets: dict<list<string>>
+export def DefinePatternset(name: string, keys: list<string>, patset: list<string>)
   # @param {string} name - a unique name for a pattern set
   # @param {list<string>} keys - select the pattern set by typing one of the items in the list
   # @param {list<string>} patset - a set of regexp patterns to search for
@@ -130,6 +130,6 @@ patsetcollections.symbol_ja = [
 ]
 export def EnablePatternsetCollection(name: string)
   for arglist in patsetcollections[name]
-    call(DefinePatternSet, arglist)
+    call(DefinePatternset, arglist)
   endfor
 enddef
