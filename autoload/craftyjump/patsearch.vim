@@ -50,7 +50,6 @@ def Patsearch(name: string, asBlock = '')
   #   ''  - separately search for matches of the start and end of the pattern set
   #   'a' - search for matches of 'a' block surrounded by pattern set like text-objects
   #   'i' - search for matches of an 'inner' block surrounded by pattern set like text-objects
-  const cnt = v:count
   const patset = patsets[name]
   var pat: string
   if asBlock ==# ''
@@ -60,7 +59,7 @@ def Patsearch(name: string, asBlock = '')
   elseif asBlock ==# 'i'
     pat = '\V' .. patset[0] .. '\zs\%(\%(' .. patset[1] .. '\)\@!\.\)\*\ze' .. patset[1]
   endif
-  craftyjump.SearchPattern(true, pat, cnt)
+  craftyjump.SearchPattern(true, pat)
 enddef
 
 var patsetcollections: dict<list<any>>
