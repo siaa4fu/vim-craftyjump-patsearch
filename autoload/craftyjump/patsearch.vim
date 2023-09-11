@@ -4,6 +4,14 @@ scriptencoding utf-8
 # requires 'siaa4fu/vim-craftyjump'
 import autoload 'craftyjump.vim'
 
+def EchomsgException()
+  # note that this function must be called in :catch
+  echohl ErrorMsg
+  echomsg v:throwpoint
+  echomsg substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
+  echohl None
+enddef
+
 # initialize plugkeys
 const plugkey = '<Plug>(craftyjump-patsearch)'
 execute 'nnoremap' plugkey '<Nop>'
@@ -41,7 +49,7 @@ export def DefinePatternset(name: string, keys: list<string>, patset: list<strin
       endif
     endfor
   catch
-    echoerr substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
+    EchomsgException()
   endtry
 enddef
 def Patsearch(name: string, asBlock = '')
