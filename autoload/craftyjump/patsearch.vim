@@ -68,6 +68,8 @@ def Patsearch(name: string, asBlock = '')
     pat = '\V' .. patset[0] .. '\zs\%(\%(' .. patset[1] .. '\)\@!\.\)\*\ze' .. patset[1]
   endif
   craftyjump.SearchPattern(true, pat)
+  # avoid `function-search-undo` (do not use the 'x' flag)
+  feedkeys("\<ScriptCmd>v:hlsearch = 1\<CR>", 'n')
 enddef
 
 var patsetcollections: dict<list<any>>
